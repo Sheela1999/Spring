@@ -19,6 +19,8 @@ public class VehicleService {
 		vehicle.transportation();
 		vehicle.protection();
 		
+		System.out.println(".......................................................");
+		
 		vehicleInterface.consumeFuel();
 		vehicleInterface.toTravel();
 	}
