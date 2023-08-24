@@ -1,8 +1,9 @@
 package com.xworkz.github.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class GithubDto {
+public class GithubDto implements Serializable{
 
 	private Integer id;
 	private String userName;
