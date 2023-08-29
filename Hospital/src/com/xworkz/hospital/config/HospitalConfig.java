@@ -11,12 +11,11 @@ import org.springframework.context.annotation.Lazy;
 import com.xworkz.hospital.dto.HospitalDto;
 
 @Configuration
-@ComponentScan("com.xworkz.hospital")
 @Lazy
+@ComponentScan("com.xworkz.hospital")
 public class HospitalConfig {
 	
 	@Bean
-	@Lazy(true)
 	public List<HospitalDto> getList(){
 		return new ArrayList<HospitalDto>();
 	}
