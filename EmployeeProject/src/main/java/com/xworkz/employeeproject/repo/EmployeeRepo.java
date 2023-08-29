@@ -22,6 +22,8 @@ public interface EmployeeRepo {
 	
 	public boolean deleteByAddressAndEmail(String address, String email);
 	
+	public boolean deleteByAddressAndEmployeeId(String address, int employeeId);
+	
 	
 
 }

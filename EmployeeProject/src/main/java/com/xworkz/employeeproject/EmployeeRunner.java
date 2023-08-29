@@ -30,14 +30,17 @@ public class EmployeeRunner {
 		
 		EmployeeDto dto5 = new EmployeeDto(6, "Rohini", "Vayavya", 4673, "Hardware Engineer", "Belagavi", 25, "B.E", "rohini@gmail.com", 7234676789l, 32000);
 		
+		EmployeeDto dto6 = new EmployeeDto(7, "Satish", "Congnizant", 2970, "Engineer", "Channai", 26, "B.E", "satish@gmail.com", 9234676789l, 95000);
+		
 //		service.save(dto);
 //		service.save(dto1);
 //		service.save(dto2);
 //		service.save(dto3);
 //		service.save(dto4);
 //		service.save(dto5);
+//		service.save(dto6);
 		
-		EmployeeDto foundData = service.findByEmployeeName("'Pallavi'");
+		EmployeeDto foundData = service.findByEmployeeName("'Satish'");
 		System.out.println(foundData);
 		
 		System.out.println("--------------------------------------FindBy2Fields----------------------------------------------------------");
@@ -53,13 +56,17 @@ public class EmployeeRunner {
 		boolean updated = service.updateCompanyNameandEducationByEmployeeName("Amazon", "B.E(CSE)", "'Maha'");
 		System.out.println(updated);
 		
-//		System.out.println("---------------------------delete----------------------------------------------------------------------------");
+		System.out.println("---------------------------delete----------------------------------------------------------------------------");
 //		boolean deleted = service.deleteById(5);
 //		System.out.println(deleted);
 		
 		System.out.println("------------------------------------------------------delete2fields-------------------------------------------");
-//		boolean dltData = service.deleteByAddressAndEmail("'Belagavi'", "rohini@gmail.com");
-//		System.out.println(dltData);
+		boolean dltData = service.deleteByAddressAndEmail("'Hubli'", "pallavi@gmail.com");
+		System.out.println(dltData);
+		
+		System.out.println("---------------------deleted----------------------------------------------------------------------------------");
+//		boolean dlted = service.deleteByAddressAndEmployeeId("'Belagavi'", 4673);
+//		System.out.println(dlted);
 		
 		System.out.println("--------------------------------------------ReadAll----------------------------------------------------------");
 		List<EmployeeDto> ReadData = service.readAll();

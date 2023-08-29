@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
@@ -108,6 +109,27 @@ public class EmployeeRepoImpl implements EmployeeRepo{
 		return true;
 		}
 		System.out.println("values are not matching");
+		return false;
+	}
+
+	@Override
+	public boolean deleteByAddressAndEmployeeId(String address, int employeeId) {
+		if(em != null) {
+			EntityTransaction transaction = em.getTransaction();
+			transaction.begin();
+			TypedQuery<EmployeeDto> query = em.createQuery("from EmployeeDto where address=" + address, EmployeeDto.class);
+			EmployeeDto dto1 = query.getSingleResult();
+			TypedQuery<EmployeeDto> query1 = em.createQuery("from EmployeeDto where employeeId=" + employeeId, EmployeeDto.class);
+			EmployeeDto dto2 = query1.getSingleResult();
+			if(dto1.equals(dto2)) {
+				em.remove(dto2);
+				System.out.println("Values are matching and Dto is deleted");
+			transaction.commit();
+			return true;
+			}
+			System.out.println("values are not matching");
+			return false;
+		}
 		return false;
 	}
 

@@ -2,6 +2,7 @@ package com.xworkz.employeeproject.dto;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Table(name = "employee")

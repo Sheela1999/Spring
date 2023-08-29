@@ -147,4 +147,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return false;
 	}
 
+	@Override
+	public boolean deleteByAddressAndEmployeeId(String address, int employeeId) {
+		if(address != null) {
+			if(employeeId >1000 && employeeId <=5000) {
+				repo.deleteByAddressAndEmployeeId(address, employeeId);
+				return true;
+			}
+			System.out.println("employee id is not valid");
+			return false;
+		}
+		System.out.println("address is not valid");
+		return false;
+	}
+
 }
