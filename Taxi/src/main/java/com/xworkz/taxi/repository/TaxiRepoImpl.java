@@ -1,27 +1,30 @@
 package com.xworkz.taxi.repository;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.xworkz.taxi.dto.MyComparator;
 import com.xworkz.taxi.dto.TaxiDto;
 
 @Component
 public class TaxiRepoImpl implements TaxiRepo{
 	
-	@Autowired
-	private EntityManagerFactory emf;
+	public EntityManagerFactory emf = Persistence.createEntityManagerFactory("taxi-connection");
+	
+	EntityManager em = emf.createEntityManager();
 
 	@Override
 	public boolean saveTaxi(TaxiDto dto) {
-		EntityManager em = emf.createEntityManager();
 		if(em != null) {
 			EntityTransaction transaction = em.getTransaction();
 			transaction.begin();
@@ -85,20 +88,32 @@ public class TaxiRepoImpl implements TaxiRepo{
 	}
 
 	@Override
-	public List<TaxiDto> bookTaxi(boolean isAvailable, int earnings) {
+	public TaxiDto bookTaxi() {
 		EntityManager em = emf.createEntityManager();
-	    List<TaxiDto> dto = findAllAvailableTaxi(isAvailable);
-	    for (TaxiDto taxiDto : dto) {
-	    	updateTaxiEarningsById(earnings, earnings);
-	    	dto.set(earnings, taxiDto);
+		if(em != null) {
+			
+		    List<TaxiDto> dto = findAllAvailableTaxi(true);
+		    
+		    MyComparator comp = new MyComparator();
+		    
+		    Collections.sort(dto, comp);
+		    
+		    for (TaxiDto taxiDto : dto) {
+				System.out.println(taxiDto);
+			}
+		    
+		    for (TaxiDto list : dto) {
+		    	int eachTripEarning = 200;
+		    	int updateEarning = list.getEarnings() + eachTripEarning;
+		    	
+		    	updateTaxiEarningsById(updateEarning, list.getId());
+		    	updateTaxiAvailableById(list.getId(), false);
+		    	return list;
+			}
+		    return null;
 		}
-	    System.out.println("updated..");
-	    Query query = em.createQuery("From TaxiDto where isAvailable and earnings"+ isAvailable + earnings);
-	    System.out.println("query..");
-	    query.setParameter(1, isAvailable);
-	    query.setParameter(2, earnings);
-	    List list = query.getResultList();
-		return list;
+		return null;
+		
 	}
 
 }

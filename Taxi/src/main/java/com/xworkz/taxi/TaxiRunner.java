@@ -22,17 +22,17 @@ public class TaxiRunner {
 		
 		TaxiService service = context.getBean(TaxiServiceImpl.class);
 		
-		TaxiDto dto = new TaxiDto(1, "KA 1234", 10000, true, "Shivmoga", 5);
-		
-		TaxiDto dto2 = new TaxiDto(2, "MA 5234", 20000, true, "Kollapur", 10);
-		
-		TaxiDto dto3 = new TaxiDto(3, "KA 4168", 30000, true, "Bangalore", 8);
-		
-		TaxiDto dto4 = new TaxiDto(4, "TN 9234", 8000, true, "Ooty", 4);
-		
-		TaxiDto dto5 = new TaxiDto(5, "KE 7234", 50000, true, "Kerala", 15);
-		
-		TaxiDto dto6 = new TaxiDto(6, "KA 1234", 16000, true, "Belagavi", 19);
+//		TaxiDto dto = new TaxiDto(1, "KA 1234", 10000, true, "Shivmoga", 5);
+//		
+//		TaxiDto dto2 = new TaxiDto(2, "MA 5234", 20000, true, "Kollapur", 10);
+//		
+//		TaxiDto dto3 = new TaxiDto(3, "KA 4168", 30000, true, "Bangalore", 8);
+//		
+//		TaxiDto dto4 = new TaxiDto(4, "TN 9234", 8000, true, "Ooty", 4);
+//		
+//		TaxiDto dto5 = new TaxiDto(5, "KE 7234", 50000, true, "Kerala", 15);
+//		
+//		TaxiDto dto6 = new TaxiDto(6, "KA 1234", 16000, true, "Belagavi", 19);
 		
 //		boolean savedData = service.saveTaxi(dto2);
 //		System.out.println(savedData);
@@ -64,10 +64,10 @@ public class TaxiRunner {
 		}
 		
 		System.out.println("--------------------------BookTaxi-----------------------------------------------------");
-		List<TaxiDto> booked = service.bookTaxi(true, 2500);
-		for (TaxiDto taxi : booked) {
-			System.out.println(taxi);
-		}
+//		List<TaxiDto> booked = service.bookTaxi(true, 2500);
+//		for (TaxiDto taxi : booked) {
+//			System.out.println(taxi);
+//		}
 		
 		System.out.println("---------------------------------readAll--------------------------------------------");
 		List<TaxiDto> readData = service.readAll();

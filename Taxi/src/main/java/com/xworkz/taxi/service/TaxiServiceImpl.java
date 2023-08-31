@@ -7,33 +7,29 @@ import org.springframework.stereotype.Component;
 
 import com.xworkz.taxi.dto.TaxiDto;
 import com.xworkz.taxi.repository.TaxiRepo;
+import com.xworkz.taxi.repository.TaxiRepoImpl;
 
 @Component
 public class TaxiServiceImpl implements TaxiService {
 
-	@Autowired
-	private TaxiRepo repo;
+	private TaxiRepo repo = new TaxiRepoImpl();
 
 	@Override
 	public boolean saveTaxi(TaxiDto dto) {
 		if (dto != null) {
 			if (dto.getId() > 0) {
 				if (dto.getTaxiNo() != null && dto.getTaxiNo().length() >= 6) {
-					if (dto.getEarnings() > 5000 && dto.getEarnings() <= 50000) {
-						if (dto.isAvailable()) {
-							if (dto.getLocation() != null) {
-								if (dto.getNoOfTrips() >= 4 && dto.getNoOfTrips() < 20) {
-									System.out.println("all the fields are validated, and ready to save");
-									repo.saveTaxi(dto);
-									return true;
-								}
-								System.out.println("trips are not valid");
-								return false;
+					if (dto.getEarnings() > 500 && dto.getEarnings() <= 6000) {
+						if (dto.getLocation() != null) {
+							if (dto.getNoOfTrips() >= 1 && dto.getNoOfTrips() < 20) {
+								System.out.println("all the fields are validated, and ready to save");
+								repo.saveTaxi(dto);
+								return true;
 							}
-							System.out.println("location is not valid");
+							System.out.println("trips are not valid");
 							return false;
 						}
-						System.out.println("taxi is not available");
+						System.out.println("location is not valid");
 						return false;
 					}
 					System.out.println("Earning is not valid");
@@ -92,8 +88,8 @@ public class TaxiServiceImpl implements TaxiService {
 	}
 
 	@Override
-	public List<TaxiDto> bookTaxi(boolean isAvailable, int earnings) {
-		return repo.bookTaxi(isAvailable, earnings);
+	public TaxiDto bookTaxi() {
+		return repo.bookTaxi();
 	}
 
 }

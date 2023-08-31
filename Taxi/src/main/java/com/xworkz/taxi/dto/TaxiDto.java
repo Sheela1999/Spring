@@ -3,9 +3,13 @@ package com.xworkz.taxi.dto;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Table(name = "Taxi_info")
 @NamedQuery(name = "readAll", query = "select dto from TaxiDto dto")

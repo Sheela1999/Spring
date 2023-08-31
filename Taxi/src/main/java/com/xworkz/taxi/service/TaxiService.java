@@ -18,6 +18,6 @@ public interface TaxiService {
 	
 	public List<TaxiDto> findAllAvailableTaxi(boolean isAvailable);
 	
-	public List<TaxiDto> bookTaxi(boolean isAvailable, int earnings);
+	public TaxiDto bookTaxi();
 
 }
