@@ -15,7 +15,7 @@ public class LawyerServiceImpl implements LawyerService {
 						System.out.println("Data is validated");
 						return true;
 					}
-					model.addAttribute("isUserNameValid", "User name is not valid");
+					model.addAttribute("isPasswordValid", "Password is not valid");
 					System.out.println("User name is not valid");
 					return false;
 				}
@@ -23,7 +23,7 @@ public class LawyerServiceImpl implements LawyerService {
 				System.out.println("Email is not valid");
 				return false;
 			}
-			model.addAttribute("isPasswordValid", "Password is not valid");
+			model.addAttribute("isUserNameValid", "UserName is not valid");
 			return false;
 		}
 		return false;
