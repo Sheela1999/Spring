@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.xworkz.lawyer.dto.ClientDto;
 import com.xworkz.lawyer.service.LawyerService;
 
 @Controller
@@ -33,6 +34,14 @@ public class ClientController {
 		
 		return "Court";
 
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String getData(ClientDto dto, Model model) {
+		System.out.println(dto);
+		model.addAttribute("dto", dto);
+		return "Court";
+		
 	}
 
 }

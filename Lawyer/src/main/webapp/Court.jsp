@@ -9,10 +9,10 @@
 <body>
 
 <h1>Lawyers.......</h1>
-<h2>${welcome}</h2>
-<h2>${isUserNameValid}</h2>
-<h2>${isEmailValid}</h2>
-<h2>${isPasswordValid}</h2>
+
+<h2>${dto.clientName}</h2>
+<h2>${dto.age}</h2>
+<h2>${dto.problem}</h2>
 
 </body>
 </html>

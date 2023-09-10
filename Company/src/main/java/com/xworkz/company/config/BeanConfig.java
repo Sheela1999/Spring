@@ -1,4 +1,4 @@
-package com.xworkz.lawyer.config;
+package com.xworkz.company.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,22 +10,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan("com.xworkz.lawyer")
+@ComponentScan("com.xworkz.company")
 @EnableWebMvc
 public class BeanConfig implements WebMvcConfigurer{
 	
 	public BeanConfig() {
-		System.out.println("Bean is ctreated");
+		System.out.println("Bean is Created..");
 	}
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addRedirectViewController("/", "Lawyer.jsp");
+		registry.addRedirectViewController("/", "Company.jsp");
 	}
 	
 	@Bean
 	public ViewResolver viewResolver() {
 		return new InternalResourceViewResolver("/", ".jsp");
+		
 	}
 
 }
