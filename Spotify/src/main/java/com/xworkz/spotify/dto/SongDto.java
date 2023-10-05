@@ -11,6 +11,8 @@ import javax.persistence.Table;
 @Entity
 @NamedQuery(name = "readAll", query = "select dto from SongDto dto")
 @NamedQuery(name = "findBySongName", query = "select dto from SongDto dto where dto.songName=:sn")
+@NamedQuery(name="update" , query="update SongDto dto set dto.artist=:an  where  dto.songName=:sn")
+@NamedQuery(name="delete", query="delete from SongDto dto where dto.album=:al")
 public class SongDto {
 
 	@Id

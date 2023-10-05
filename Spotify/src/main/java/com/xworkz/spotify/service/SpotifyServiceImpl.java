@@ -20,8 +20,12 @@ public class SpotifyServiceImpl implements SpotifyService {
 	@Override
 	public boolean validate(SongDto dto, Model model) {
 		boolean valid = true;
-		if (dto != null) {
-			System.out.println("dto is valid");
+		if (dto == null) {
+		model.addAttribute("dtoValidate", "Dto is Null");
+		System.out.println("Dto is Null");
+		  valid = false;
+		}
+			
 			if (dto.getSongName() == null || dto.getSongName().length() <= 3 || dto.getSongName().isEmpty()) {
 				model.addAttribute("IsSongValid", "Song name is not valid");
 				valid = false;
@@ -42,11 +46,8 @@ public class SpotifyServiceImpl implements SpotifyService {
 				model.addAttribute("IsComposerValid", "Composer name is not valid");
 				valid = false;
 			}
-		}
-
-		model.addAttribute("dtoValidate", "Dto is Null");
-		System.out.println("Dto is Null");
-		return valid = false;
+			return valid;
+		
 	}
 
 	@Override
@@ -68,19 +69,49 @@ public class SpotifyServiceImpl implements SpotifyService {
 
 	@Override
 	public SongDto findBySongName(String songName, Model model) {
-		if(songName != null && !songName.isEmpty()) {
-			try {
-				SongDto dto = repo.findBySongName(songName, model);
-				return dto;
-			} catch (NoResultException e) {
-				model.addAttribute("SongNotFound", "Song Not Found, Please add this Song");
-				e.printStackTrace();
-				return null;
+		if (songName != null && songName.length() >= 4) {
+			SongDto found = repo.findBySongName(songName);
+			if (found != null) {
+				return found;
 			}
+			model.addAttribute("SongNotFound", "Song Not Found, Please add this Song");
+			System.out.println("Song Not Found, Please add this Song");
+			return null;
 		}
 		model.addAttribute("IsSongNameValid", "song name is not valid");
 		System.out.println("song name is not valid");
 		return null;
+
+	}
+	
+	@Override
+	public boolean updateArtistBySong(String artist, String songName,Model model) {
+		boolean valid=true;
+		if(artist==null || artist.length()<3 ||artist.isEmpty()) {
+			model.addAttribute( "artistvalidate", "Given ArtistName is not valid");
+			valid= false;
+		}
+			if(songName==null || songName.length()<3 || songName.isEmpty()) {
+				model.addAttribute("songNameValidate", "Given SongName is not valid");
+				valid= false;
+			}
+				
+			boolean update =repo.updateArtistBySong(artist,songName);
+			return update;
+					
 		
+	}
+
+	@Override
+	public boolean deleteByAlbum(String album, Model model) {
+		boolean valid=true;
+		if(album==null || album.length()<3 || album.isEmpty()) {
+			model.addAttribute("albumValidate", "Given album is not valid");
+			valid= false;
+		}
+		
+		boolean dlt = repo.deleteByAlbum(album);
+		return dlt;	
+	
 	}
 }

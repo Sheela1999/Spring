@@ -46,12 +46,72 @@ public class SpotifyRepositoryImpl implements SpotifyRepository {
 	}
 
 	@Override
-	public SongDto findBySongName(String songName, Model model) throws NoResultException{
+	public SongDto findBySongName(String songName) {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<SongDto> query = em.createNamedQuery("findBySongName", SongDto.class);
 		query.setParameter("sn", songName);
-		SongDto dto = query.getSingleResult();
-		return dto;
+		List<SongDto> dtos = query.getResultList();
+
+		if (!dtos.isEmpty()) {
+			SongDto dto = query.getSingleResult();
+			return dto;
+		}
+		System.out.println("No Entity Found");
+		return null;
+	}
+
+	@Override
+	public boolean updateArtistBySong(String artist, String songName) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Query query = em.createNamedQuery("update")
+				.setParameter("an", artist)
+				.setParameter("sn", songName);
+		int i = query.executeUpdate();
+
+		try {
+			
+			if (i > 0) {
+				System.out.println("Data is updated");
+			em.getTransaction().commit();
+				return true;
+			}
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			em.close();
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean deleteByAlbum(String album) {
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Query query = em.createNamedQuery("delete").setParameter("al", album);
+		int i = query.executeUpdate();
+
+		try {
+			em.getTransaction().commit();
+			if (i > 0) {
+				System.out.println("Data is deleted");
+				return true;
+			}
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+
+		} finally {
+			System.out.println("Resource is closed");
+
+			em.close();
+		}
+		return false;
+
 	}
 
 }

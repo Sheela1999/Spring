@@ -16,4 +16,8 @@ public interface SpotifyService {
 
 	public SongDto findBySongName(String songName, Model model);
 
+	boolean deleteByAlbum(String album, Model model);
+
+	boolean updateArtistBySong(String artist, String songName, Model model);
+
 }
